@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cena elektřiny pro domácnosti</title>
+
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+
+<div style="width: 600px; height: 400px;" id="odmeny"></div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+
+<script type="text/javascript">
+
+var colors = ['#b80058','#ebac23','#008cf9','#006e00','#00bbad','#d163e6','#b24502','#ff9287', '#5954d6', '#00c6f8', '#878500', '#00a76c', '#bdbdbd'];
+
+var data = [
+{"min":"Min. dopravy","n":400,"y":58674,"celkem":"23,5"},
+{"min":"Min. práce","n":850,"y":50859,"celkem":"43,2"},
+{"min":"Úřad vlády","n":468,"y":44359,"celkem":"20,8"},
+{"min":"Min. živ. prost.","n":478,"y":41092,"celkem":"19,6"},
+{"min":"Min. zdr.","n":433,"y":39844,"celkem":"17,3"},
+{"min":"Min. zahr.","n":721,"y":38696,"celkem":"27,9"},
+{"min":"Min. sprav.","n":404,"y":38449,"celkem":"15,5"},
+{"min":"Min. fin.","n":1021,"y":38268,"celkem":"39,1"},
+{"min":"Min. prům.","n":640,"y":37595,"celkem":"24,1"},
+{"min":"Min. obr.","n":1069,"y":36849,"celkem":"39,4"},
+{"min":"Min. míst. rozv.","n":390,"y":34632,"celkem":"13,5"},
+{"min":"Min. zem.","n":643,"y":33157,"celkem":"21,3"},
+{"min":"Min. škol.","n":508,"y":30525,"celkem":"15,5"},
+{"min":"Min. vnitra","n":2291,"y":28010,"celkem":"64,2"},
+{"min":"Min. kult.","n":283,"y":26470,"celkem":"7,5"}
+]
+
+var min = data.map(function(x) {return x.min;});
+
+Highcharts.chart('odmeny', {
+    chart: {
+        type: 'column'
+    },
+
+    title: {
+        text: 'Odměny na ministerstvech'
+    },
+
+    subtitle: {
+        text: '2. pololetí 2019'
+    },
+
+    xAxis: {
+        categories: min
+    },
+
+    yAxis: {
+        title: {
+            text: 'průměrná odměna'
+        },
+        labels: {
+            formatter: function () {
+                return this.value + ' Kč';
+            }
+        },
+        max: 60000
+    },
+
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.x + '<b><br/>' +
+                   'průměrná odměna: ' + this.y + ' Kč<br/>' +
+                   'celkové odměny: ' + this.point.celkem + ' mil. Kč<br/>' +
+                   'počet odměněných: ' + this.point.n
+        }
+    },
+
+
+    exporting: {
+        enabled: false
+    },
+
+    legend: {
+        enabled: false
+    },
+
+    credits: {
+        href: '',
+        text: 'Zdroj: Úřad vlády, ministerstva'
+    },
+
+    series: [{
+        name: 'odměny',
+        data: data,
+        color: colors[0]
+    }]
+});
+
+</script>
+</html>
